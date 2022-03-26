@@ -29,7 +29,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <TeamCreation pokemon={Array.from(this.state.pokeList.keys())}/>
+        <TeamCreation pokemon={this.state.pokeList}/>
       </div>
     );
   }

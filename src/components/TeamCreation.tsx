@@ -5,7 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { CardTravelSharp, ThreeMpTwoTone } from "@mui/icons-material";
 
 interface Props {
-    pokemon: string[];
+    pokemon: Map<any, any>;
 }
 
 class TeamCreation extends React.Component<Props, {}>{
@@ -16,11 +16,16 @@ class TeamCreation extends React.Component<Props, {}>{
     constructor(props: any){
         super(props);
         this.addCard = this.addCard.bind(this);
+        this.getTime = this.getTime.bind(this);
     }
 
     addCard(){
+        this.setState({cards: [...this.state.cards, <CardInput pokemon={this.props.pokemon} key={this.getTime()}/>]})
+    }
+
+    getTime(){
         let time = new Date();
-        this.setState({cards: [...this.state.cards, <CardInput pokemon={this.props.pokemon} key={time.getTime()}/>]})
+        return time.getTime();
     }
 
     render() {
@@ -37,7 +42,7 @@ class TeamCreation extends React.Component<Props, {}>{
                     display: 'flex',
                     justifyContent: 'center'
                 }}>
-                    <Button variant="contained" size="large">Confirm</Button>
+                    <Button variant="contained" size="large" disabled={this.state.cards.length === 0}>Confirm</Button>
                 </Box>
             </div>
         );
