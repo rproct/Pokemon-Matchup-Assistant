@@ -1,8 +1,11 @@
 import React, { SyntheticEvent } from "react";
-import {Card, CardMedia, Autocomplete, TextField, Fade, Slide} from '@mui/material';
+import {Card, CardMedia, Autocomplete, TextField, Fade, Slide, Button} from '@mui/material';
+import MissingNo from '../Missingno.png'
+import {DoNotDisturbOn} from '@mui/icons-material';
 
 interface Props {
     pokemon: Map<any, any>;
+    time: number;
 }
 
 class CardInput extends React.Component<Props, {}>{
@@ -25,14 +28,18 @@ class CardInput extends React.Component<Props, {}>{
 
     render() {
         return(
-            <Fade in={this.state.fade} timeout={500} unmountOnExit>
-                <div style={{width: '15%'}}>
+            <Fade in={this.state.fade} timeout={500} onAnimationEnd={() => {if(!this.state.fade) console.log('Card unmounted')}}>
+                <div>
                     <Slide in={this.state.fade}>
-                        <Card sx={{p: '1rem', border: 15}}>
+                        <Card sx={{p: '1rem', border: 15, borderColor: 'gray', width: '15em'}}>
+                            <Button sx={{float: "right"}} onClick={() => this.setState({fade: false})}>
+                                <DoNotDisturbOn sx={{color: 'red'}}/>
+                            </Button>
                             <CardMedia
-                                component='image'
+                                component='img'
                                 height='200'
-                                image='../Missingno.png'
+                                image={MissingNo}
+                                sx={{py: '1em'}}
                             />
                             <Autocomplete
                                 disablePortal

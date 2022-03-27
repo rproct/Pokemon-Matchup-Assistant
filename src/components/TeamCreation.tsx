@@ -20,7 +20,8 @@ class TeamCreation extends React.Component<Props, {}>{
     }
 
     addCard(){
-        this.setState({cards: [...this.state.cards, <CardInput pokemon={this.props.pokemon} key={this.getTime()}/>]})
+        let time = this.getTime();
+        this.setState({cards: [...this.state.cards, <CardInput pokemon={this.props.pokemon} time={time} key={time}/>]})
     }
 
     getTime(){
